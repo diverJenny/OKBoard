@@ -12,15 +12,15 @@
       >
     </div>
   </v-app-bar>
-  <NavigationDrawers />
-  <hr />
+  <!--  <NavigationDrawers />-->
+  <!--  <hr />-->
 </template>
 
 <script>
-import { defineComponent } from "vue";
+/*import { defineComponent } from "vue";
 import NavigationDrawers from "@/components/NavigationDrawers.vue";
 
 export default defineComponent({
   components: { NavigationDrawers },
-});
+});*/
 </script>
