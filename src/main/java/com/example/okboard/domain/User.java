@@ -33,12 +33,13 @@ public class User {
     @Column(length = 50, nullable = false, unique = true)
     private String email;
 
+    @Column(length = 20, nullable = false)
     private String name;
 
     @Column(length = 50, nullable = false)
     private String password;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
     private LocalDateTime createdAt; // createdAt 필드에 @Column 어노테이션 추가
 
     private LocalDateTime updatedAt;

@@ -1,6 +1,7 @@
 package com.example.okboard.dto;
 
 import com.example.okboard.domain.Post;
+import com.example.okboard.domain.User;
 import lombok.*;
 
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class PostDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int viewCnt;
+    private User user;
 
     public Post toPost() {
         return Post.builder()
@@ -32,6 +34,7 @@ public class PostDTO {
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .viewCnt(viewCnt)
+                .user(user)
                 .build();
     }
 }

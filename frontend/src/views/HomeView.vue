@@ -1,18 +1,16 @@
 <template>
-  <HelloWorld />
+  <PageHaeder />
+  <v-main
+    class="d-flex align-center justify-center"
+    style="min-height: 500px"
+  ></v-main>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-
-// Components
-import HelloWorld from "../components/HelloWorld.vue";
+import PageHaeder from "@/components/PageHaeder.vue";
 
 export default defineComponent({
-  name: "HomeView",
-
-  components: {
-    HelloWorld,
-  },
+  components: { PageHaeder },
 });
 </script>
