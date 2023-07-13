@@ -84,6 +84,7 @@
 <script>
 import axios from "axios";
 import router from "@/router";
+import store from "@/scripts/store";
 
 export default {
   data: () => ({
@@ -103,6 +104,8 @@ export default {
           // 로그인이 성공한 경우
           if (response.status === 200) {
             console.log("로그인 성공");
+            store.commit("setAccount", response.data);
+            sessionStorage.setItem("id", response.data);
             router.push("/");
           } else {
             // 로그인 실패 처리

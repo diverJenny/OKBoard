@@ -1,5 +1,5 @@
 <template>
-  <PageHaeder />
+  <PageHeader />
   <!--  <v-main class="d-flex align-center justify-center" style="min-height: 500px">-->
   <!--  <NavigationDrawers></NavigationDrawers>-->
   <BoardList class="d-flex align-center justify-center" />
@@ -7,12 +7,21 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import PageHaeder from "@/components/PageHaeder.vue";
 import BoardList from "@/components/BoardList.vue";
+import store from "@/scripts/store";
+import PageHeader from "@/components/PageHeader.vue";
 
-export default defineComponent({
-  components: { BoardList, PageHaeder },
-});
+export default {
+  name: "HomeView",
+  components: { PageHeader, BoardList },
+  setup() {
+    const id = sessionStorage.getItem("id");
+    console.log(id);
+
+    if (id) {
+      store.commit("setAccount", id);
+    }
+  },
+};
 </script>
 <style></style>
