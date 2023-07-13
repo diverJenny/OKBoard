@@ -20,7 +20,7 @@ public class SignController {
 
     // 로그인
     @PostMapping(value = "/sign-in")
-    public ResponseEntity signIn(UserDTO userDto) {
+    public ResponseEntity<String> signIn(UserDTO userDto) {
         String email = userDto.getEmail();
         String password = userDto.getPassword();
         // 사용자 인증 처리

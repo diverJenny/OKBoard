@@ -1,3 +1,4 @@
+<!-- SignIn.vue -->
 <template>
   <div>
     <v-img class="mx-auto my-6" max-width="50" src="@/img/logo.png"></v-img>
