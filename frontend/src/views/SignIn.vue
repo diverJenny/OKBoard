@@ -8,6 +8,10 @@
       max-width="448"
       rounded="lg"
     >
+      <v-card-text class="text-center text-blue" style="font-size: x-large">
+        Sign In</v-card-text
+      >
+
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>
 
       <v-text-field

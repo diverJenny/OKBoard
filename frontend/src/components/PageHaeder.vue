@@ -1,26 +1,28 @@
 <!-- PageHeader.vue -->
 <template>
-  <v-app-bar title="OK Board">
-    <link rel="icon" href="/public/favicon.ico" type="image/x-icon" />
-    <div id="nav">
-      <router-link to="/"><v-btn variant="text"> Login </v-btn></router-link>
+  <link rel="icon" href="/public/favicon.ico" type="image/x-icon" />
+  <v-app-bar>
+    <v-avatar size="36" style="margin-left: 30px">
+      <v-img src="../img/logo.png" />
+    </v-avatar>
+    <v-app-bar-title class="ml-2"> OK Board</v-app-bar-title>
+    <template v-slot:append>
       <router-link to="/sign-in"
         ><v-btn variant="text"> Sign In </v-btn></router-link
       >
       <router-link to="/sign-up"
         ><v-btn variant="text"> Sign Up </v-btn></router-link
       >
-    </div>
+    </template>
   </v-app-bar>
   <!--  <NavigationDrawers />-->
   <!--  <hr />-->
 </template>
 
-<script>
-/*import { defineComponent } from "vue";
-import NavigationDrawers from "@/components/NavigationDrawers.vue";
+<script></script>
 
-export default defineComponent({
-  components: { NavigationDrawers },
-});*/
-</script>
+<style>
+.v-avatar {
+  overflow: hidden;
+}
+</style>

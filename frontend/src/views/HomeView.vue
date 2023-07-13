@@ -2,16 +2,17 @@
   <PageHaeder />
   <!--  <v-main class="d-flex align-center justify-center" style="min-height: 500px">-->
   <!--  <NavigationDrawers></NavigationDrawers>-->
-  <BoardListView class="d-flex align-center justify-center" />
+  <BoardList class="d-flex align-center justify-center" />
+  <v-btn icon="mdi-plus" size="small"></v-btn>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import PageHaeder from "@/components/PageHaeder.vue";
-import BoardListView from "@/components/BoardListView.vue";
+import BoardList from "@/components/BoardList.vue";
 
 export default defineComponent({
-  components: { BoardListView, PageHaeder },
+  components: { BoardList, PageHaeder },
 });
 </script>
 <style></style>
