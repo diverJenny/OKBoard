@@ -71,6 +71,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "@/router";
+
 export default {
   data: () => ({
     visible: false,
@@ -78,15 +81,52 @@ export default {
     email: null,
     name: null,
     password: null,
+    passwordChk: null,
     terms: false,
   }),
 
   methods: {
     signUp() {
-      const formData = new FormData();
-      formData.append("email", this.email);
-      formData.append("name", this.name);
-      formData.append("password", this.password);
+      const userData = {
+        email: this.email,
+        name: this.name,
+        password: this.password,
+        passwordChk: this.passwordChk,
+      };
+
+      /*if (this.password === this.passwordChk) {
+        axios.post("/sign-api/sign-up", userData).then((response) => {
+          if (response.status === 200) {
+            console.log("회원가입 성공");
+            window.alert("회원가입을 축하합니다.");
+            router.push("/");
+          }
+        });
+      } else {
+        console.log("회원가입 실패");
+        window.alert("패스워드가 일치하지 않습니다.");
+      }*/
+      if (
+        this.email &&
+        this.name &&
+        this.password &&
+        this.passwordChk &&
+        this.terms
+      ) {
+        if (this.password === this.passwordChk) {
+          axios.post("sign-api/sign-up", userData).then((response) => {
+            if (response.status === 200) {
+              console.log("회원가입 성공");
+              window.alert("회원가입을 축하합니다.");
+              router.push("/");
+            }
+          });
+        } else {
+          window.alert("패스워드가 일치하지 않습니다.");
+        }
+      } else {
+        window.alert("모든 필드를 입력해야 합니다.");
+      }
     },
   },
 };

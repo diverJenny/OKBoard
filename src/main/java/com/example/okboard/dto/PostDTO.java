@@ -25,8 +25,13 @@ public class PostDTO {
     private LocalDateTime updatedAt;
     private int viewCnt;
     private User user;
+    private String username;
 
     public Post toPost() {
+        String username = "";
+        if(user != null) {
+            username = user.getName();
+        }
         return Post.builder()
                 .id(id)
                 .title(title)
@@ -35,6 +40,7 @@ public class PostDTO {
                 .updatedAt(updatedAt)
                 .viewCnt(viewCnt)
                 .user(user)
+                .username(username)
                 .build();
     }
 }

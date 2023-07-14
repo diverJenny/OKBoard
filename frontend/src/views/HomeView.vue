@@ -3,7 +3,7 @@
   <!--  <v-main class="d-flex align-center justify-center" style="min-height: 500px">-->
   <!--  <NavigationDrawers></NavigationDrawers>-->
   <BoardList class="d-flex align-center justify-center" />
-  <v-btn icon="mdi-plus" size="small"></v-btn>
+  <v-btn icon="mdi-plus" size="small" color="indigo"></v-btn>
 </template>
 
 <script>

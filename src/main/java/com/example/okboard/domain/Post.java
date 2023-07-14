@@ -44,6 +44,8 @@ public class Post {
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .viewCnt(viewCnt)
+                .user(user)
+                .username(username)
                 .build();
     }
 }

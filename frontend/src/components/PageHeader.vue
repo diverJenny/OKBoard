@@ -8,7 +8,7 @@
     <v-app-bar-title class="ml-2"> OK Board</v-app-bar-title>
     <template v-slot:append>
       <router-link to="/sign-in" v-if="!$store.state.account.id"
-        ><v-btn variant="text"> Sign In </v-btn></router-link
+        ><v-btn flat> Sign In </v-btn></router-link
       >
       <router-link to="/sign-up"
         ><v-btn variant="text" v-if="!$store.state.account.id">
@@ -39,30 +39,6 @@ export default {
   },
 };
 </script>
-
-<!--
-<script>
-import { ref } from 'vue';
-import store from "@/scripts/store";
-import router from "@/router";
-
-export default {
-  name: "PageHeader",
-  setup() {
-    const logout = ref(() => {
-      store.commit("setAccount", 0);
-      console.log("logout click");
-      sessionStorage.removeItem("id");
-      router.push("/");
-    });
-
-    return {
-      logout,
-    };
-  },
-};
-</script>
--->
 
 <style>
 .v-avatar {

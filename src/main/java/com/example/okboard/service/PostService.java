@@ -18,8 +18,12 @@ public class PostService {
     public List<PostDTO> getPosts() {
         List<Post> postList = repository.findAll();
         List<PostDTO> postDtoList = new ArrayList<>();
-        for(Post post : postList) {
-            postDtoList.add(post.toPostDto());
+        for (Post post : postList) {
+            PostDTO postDto = post.toPostDto();
+            String username = post.getUser().getName();
+            System.out.println(username);
+            postDto.setUsername(username);
+            postDtoList.add(postDto);
         }
         return postDtoList;
     }
