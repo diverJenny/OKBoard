@@ -30,17 +30,39 @@ import router from "@/router";
 
 export default {
   name: "PageHeader",
+  methods: {
+    logout() {
+      store.commit("setAccount", 0);
+      sessionStorage.removeItem("id");
+      router.push("/");
+    },
+  },
+};
+</script>
+
+<!--
+<script>
+import { ref } from 'vue';
+import store from "@/scripts/store";
+import router from "@/router";
+
+export default {
+  name: "PageHeader",
   setup() {
-    // eslint-disable-next-line no-unused-vars
-    const logout = () => {
+    const logout = ref(() => {
       store.commit("setAccount", 0);
       console.log("logout click");
       sessionStorage.removeItem("id");
       router.push("/");
+    });
+
+    return {
+      logout,
     };
   },
 };
 </script>
+-->
 
 <style>
 .v-avatar {

@@ -29,6 +29,7 @@
       ></v-text-field>
 
       <v-text-field
+        v-model="password"
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
@@ -39,13 +40,14 @@
       ></v-text-field>
 
       <v-text-field
-        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="visible ? 'text' : 'password'"
+        v-model="passwordChk"
+        :append-inner-icon="visible2 ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible2 ? 'text' : 'password'"
         density="compact"
         placeholder="Confirm password"
         prepend-inner-icon="mdi-checkbox-marked-circle-outline"
         variant="outlined"
-        @click:append-inner="visible = !visible"
+        @click:append-inner="visible2 = !visible2"
       ></v-text-field>
 
       <v-checkbox
@@ -54,7 +56,14 @@
         label="I agree to site terms and conditions"
       ></v-checkbox>
 
-      <v-btn block class="mb-8" color="blue" size="large" variant="tonal">
+      <v-btn
+        block
+        class="mb-8"
+        color="blue"
+        size="large"
+        variant="tonal"
+        @click="signUp"
+      >
         Sign Up
       </v-btn>
     </v-card>
@@ -65,11 +74,21 @@
 export default {
   data: () => ({
     visible: false,
+    visible2: false,
     email: null,
     name: null,
     password: null,
     terms: false,
   }),
+
+  methods: {
+    signUp() {
+      const formData = new FormData();
+      formData.append("email", this.email);
+      formData.append("name", this.name);
+      formData.append("password", this.password);
+    },
+  },
 };
 </script>
 <style scoped></style>
