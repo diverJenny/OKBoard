@@ -37,6 +37,7 @@ public class Post {
     private User user;
 
     public PostDTO toPostDto() {
+        String username = user.getName();
         return PostDTO.builder()
                 .id(id)
                 .title(title)
@@ -45,7 +46,6 @@ public class Post {
                 .updatedAt(updatedAt)
                 .viewCnt(viewCnt)
                 .user(user)
-                .username(username)
                 .build();
     }
 }

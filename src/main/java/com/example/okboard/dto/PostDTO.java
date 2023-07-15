@@ -2,6 +2,7 @@ package com.example.okboard.dto;
 
 import com.example.okboard.domain.Post;
 import com.example.okboard.domain.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.GeneratedValue;
@@ -24,14 +25,10 @@ public class PostDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int viewCnt;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Hibernate 프록시 필드 제외
     private User user;
-    private String username;
 
     public Post toPost() {
-        String username = "";
-        if(user != null) {
-            username = user.getName();
-        }
         return Post.builder()
                 .id(id)
                 .title(title)
@@ -40,7 +37,6 @@ public class PostDTO {
                 .updatedAt(updatedAt)
                 .viewCnt(viewCnt)
                 .user(user)
-                .username(username)
                 .build();
     }
 }

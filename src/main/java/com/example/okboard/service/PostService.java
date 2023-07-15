@@ -22,7 +22,6 @@ public class PostService {
             PostDTO postDto = post.toPostDto();
             String username = post.getUser().getName();
             System.out.println(username);
-            postDto.setUsername(username);
             postDtoList.add(postDto);
         }
         return postDtoList;

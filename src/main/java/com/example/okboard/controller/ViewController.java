@@ -16,4 +16,7 @@ public class ViewController {
         return "forward:/index.html";
     }
 
+    @GetMapping("create-post")
+    public String createPostPage() {return "forward:/index.html";}
+
 }
