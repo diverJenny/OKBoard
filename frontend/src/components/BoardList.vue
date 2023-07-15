@@ -11,7 +11,7 @@
       <tr v-for="post in posts" :key="post.id">
         <td>{{ post.title }}</td>
         <td>{{ getWriterName(post.user) }}</td>
-        <td>{{ post.createdAt }}</td>
+        <td>{{ formatCreatedAt(post.createdAt) }}</td>
       </tr>
     </tbody>
   </v-table>
@@ -19,6 +19,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data() {
@@ -55,6 +56,10 @@ export default {
     getWriterName(user) {
       const writer = this.writers.find((writer) => writer.id === user.id);
       return writer ? writer.name : "N/A";
+    },
+    // 날짜 출력 형식 변환
+    formatCreatedAt(createdAt) {
+      return moment(createdAt).format("YYYY-MM-DD");
     },
   },
 };
