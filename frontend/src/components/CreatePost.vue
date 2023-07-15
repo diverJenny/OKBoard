@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" style="max-width: 500px">
     <v-toolbar color="deep-purple-accent-4" cards dark flat>
-      <v-btn icon>
+      <v-btn icon @click="goBack">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-card-title class="text-h6 font-weight-regular">
@@ -29,7 +29,11 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
+import router from "@/router";
+import store from "@/scripts/store";
+
 export default {
   data() {
     return {
@@ -39,12 +43,20 @@ export default {
   },
   methods: {
     submitForm() {
-      // 폼 제출 또는 다른 작업 처리
-      console.log("Form submitted:", this.title, this.content);
+      if (store.state.account) {
+        // 로그인이 되어 있는 경우 게시글 작성 처리 로직 추가
+        console.log("게시글 작성:", this.title, this.content);
+      } else {
+        // 로그인이 되어 있지 않은 경우 로그인 페이지로 이동
+        router.push("/signin");
+      }
     },
     clearForm() {
       this.title = "";
       this.content = "";
+    },
+    goBack() {
+      router.go(-1); // 이전 페이지로 돌아가기
     },
   },
 };
