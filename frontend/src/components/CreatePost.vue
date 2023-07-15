@@ -25,14 +25,14 @@
     <v-card-actions>
       <v-btn variant="text" @click="clearForm"> Clear </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="deep-purple-accent-4" @click="submitForm"> Submit </v-btn>
+      <v-btn color="deep-purple-accent-4" @click="createPost"> Submit </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
 import router from "@/router";
-import store from "@/scripts/store";
+import axios from "axios";
 
 export default {
   data() {
@@ -42,13 +42,32 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      if (store.state.account) {
-        // 로그인이 되어 있는 경우 게시글 작성 처리 로직 추가
-        console.log("게시글 작성:", this.title, this.content);
+    createPost() {
+      if (this.title === "" || this.content === "") {
+        alert("항목을 모두 작성해주세요.");
       } else {
-        // 로그인이 되어 있지 않은 경우 로그인 페이지로 이동
-        router.push("/signin");
+        const userId = sessionStorage.getItem("user_id");
+        console.log(userId);
+
+        const postDto = {
+          title: this.title,
+          content: this.content,
+          user: { id: userId },
+        };
+
+        axios
+          .post("/post", postDto)
+          .then((response) => {
+            if (response.status === 200) {
+              window.alert("게시글 작성이 완료되었습니다.");
+              router.push("/");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        console.log("Submit Form:", postDto);
       }
     },
     clearForm() {

@@ -20,7 +20,7 @@ public class UserController {
 
     // 전체 사용자 조회
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getUsers() throws Exception {
+    public ResponseEntity<List<UserDTO>> getUsers() throws Exception {
         List<UserDTO> dtoList = userService.getUsers();
         return ResponseEntity.ok(dtoList);
     }

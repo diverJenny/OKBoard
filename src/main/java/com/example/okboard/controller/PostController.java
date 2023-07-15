@@ -1,7 +1,9 @@
 package com.example.okboard.controller;
 
+import com.example.okboard.domain.User;
 import com.example.okboard.dto.PostDTO;
 import com.example.okboard.service.PostService;
+import com.example.okboard.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService service;
+    private final UserService userService;
 
     // 전체 게시글 조회
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,12 +39,19 @@ public class PostController {
 
     // 게시글 작성
     @PostMapping
-    public ResponseEntity<String> createPost(@RequestBody PostDTO postDto) throws Exception{
+    public ResponseEntity<String> createPost(@RequestBody PostDTO postDto) throws Exception {
+        System.out.printf(String.valueOf(postDto));
+        // 사용자 객체 조회
+        Long userId = postDto.getUser().getId();
+        User user = userService.findUserById(userId).toUser();
 
+        // 사용자 객체를 postDto에 설정
+        postDto.setUser(user);
         postDto.setCreatedAt(LocalDateTime.now());
         postDto.setTitle(postDto.getTitle());
         postDto.setContent(postDto.getContent());
         service.createPost(postDto);
+
         return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
     }
 

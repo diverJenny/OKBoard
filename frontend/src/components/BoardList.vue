@@ -30,7 +30,6 @@ export default {
   },
   created() {
     this.fetchPosts(); // 컴포넌트 생성 시 게시글 목록 조회
-    this.fetchWriters();
   },
   methods: {
     fetchPosts() {
@@ -38,6 +37,7 @@ export default {
         .get("/post")
         .then((response) => {
           this.posts = response.data;
+          this.fetchWriters(); // 작성자 정보 가져오기
         })
         .catch((error) => {
           console.error(error);

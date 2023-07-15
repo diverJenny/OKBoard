@@ -20,19 +20,22 @@ public class SignController {
 
     // 로그인
     @PostMapping(value = "/sign-in")
-    public ResponseEntity<String> signIn(UserDTO userDto) {
+    public ResponseEntity<UserDTO> signIn(UserDTO userDto) {
         String email = userDto.getEmail();
         String password = userDto.getPassword();
         // 사용자 인증 처리
         boolean isAuthenticated = service.signIn(email, password);
 
-        if(isAuthenticated) {
+        if (isAuthenticated) {
             // 인증 성공
             User user = service.getUserByEmail(email);
-            return ResponseEntity.ok("로그인 성공");
+            UserDTO responseDto = new UserDTO();
+            responseDto.setId(user.getId());
+
+            return ResponseEntity.ok(responseDto);
         } else {
             // 인증 실패
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 

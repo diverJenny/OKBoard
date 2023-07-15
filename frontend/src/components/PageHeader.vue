@@ -33,7 +33,7 @@ export default {
   methods: {
     logout() {
       store.commit("setAccount", 0);
-      sessionStorage.removeItem("id");
+      sessionStorage.removeItem("user_id");
       router.go(0);
     },
   },

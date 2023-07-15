@@ -81,6 +81,7 @@
     </v-card>
   </div>
 </template>
+Copy code
 <script>
 import axios from "axios";
 import router from "@/router";
@@ -102,10 +103,16 @@ export default {
         .post("/sign-api/sign-in", formData)
         .then((response) => {
           // 로그인이 성공한 경우
+          console.log(response.data);
           if (response.status === 200) {
-            console.log("로그인 성공");
-            store.commit("setAccount", response.data);
-            sessionStorage.setItem("id", response.data);
+            const userId = response.data.id;
+
+            // Store에 계정 정보 저장
+            store.commit("setAccount", userId);
+
+            // sessionStorage에 user_id 저장
+            sessionStorage.setItem("user_id", userId);
+            console.log(userId);
             router.push("/");
           } else {
             // 로그인 실패 처리

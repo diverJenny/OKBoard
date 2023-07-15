@@ -25,17 +25,19 @@ export default {
   setup() {
     const state = reactive({
       isLoggedIn: false,
+      username: "",
     });
 
-    const id = sessionStorage.getItem("id");
+    const userId = sessionStorage.getItem("user_id");
 
-    if (id) {
-      store.commit("setAccount", id);
+    if (userId) {
+      store.commit("setAccount", userId);
       state.isLoggedIn = true;
+      state.username = store.state.username;
     }
 
     const showLoginMessage = () => {
-      alert("로그인이 필요합니다."); // 로그인이 필요한 메시지를 사용자에게 표시할 수 있습니다.
+      alert("로그인이 필요합니다.");
     };
 
     return {
@@ -45,5 +47,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
