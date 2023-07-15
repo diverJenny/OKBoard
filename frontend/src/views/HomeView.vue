@@ -16,7 +16,6 @@ export default {
   components: { PageHeader, BoardList },
   setup() {
     const id = sessionStorage.getItem("id");
-    console.log(id);
 
     if (id) {
       store.commit("setAccount", id);

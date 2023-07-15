@@ -10,7 +10,7 @@
     <tbody>
       <tr v-for="post in posts" :key="post.id">
         <td>{{ post.title }}</td>
-        <td>{{ post.user ? post.user.name : "N/A" }}</td>
+        <td>{{ getWriterName(post.user) }}</td>
         <td>{{ post.createdAt }}</td>
       </tr>
     </tbody>
@@ -24,24 +24,38 @@ export default {
   data() {
     return {
       posts: [], // 게시글 목록을 저장할 배열
+      writers: [],
     };
   },
   created() {
     this.fetchPosts(); // 컴포넌트 생성 시 게시글 목록 조회
+    this.fetchWriters();
   },
   methods: {
     fetchPosts() {
       axios
-        .get("/post") // 게시글 목록을 조회하는 API 엔드포인트로 변경해야 합니다.
+        .get("/post")
         .then((response) => {
-          this.posts = response.data; // 응답 데이터를 게시글 목록 배열에 저장
+          this.posts = response.data;
         })
         .catch((error) => {
           console.error(error);
         });
     },
+    fetchWriters() {
+      axios
+        .get("/users")
+        .then((response) => {
+          this.writers = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getWriterName(user) {
+      const writer = this.writers.find((writer) => writer.id === user.id);
+      return writer ? writer.name : "N/A";
+    },
   },
 };
 </script>
-
-<style scoped></style>
