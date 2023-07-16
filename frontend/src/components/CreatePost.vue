@@ -5,7 +5,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-card-title class="text-h6 font-weight-regular">
-        게시글 작성
+        Write a post
       </v-card-title>
       <v-spacer></v-spacer>
     </v-toolbar>
@@ -56,7 +56,7 @@ export default {
         };
 
         axios
-          .post("/post", postDto)
+          .post("/api/post", postDto)
           .then((response) => {
             if (response.status === 200) {
               window.alert("게시글 작성이 완료되었습니다.");

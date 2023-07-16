@@ -100,7 +100,7 @@ export default {
       formData.append("password", this.password);
 
       axios
-        .post("/sign-api/sign-in", formData)
+        .post("/api/sign-api/sign-in", formData)
         .then((response) => {
           // 로그인이 성공한 경우
           console.log(response.data);

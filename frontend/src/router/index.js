@@ -1,8 +1,11 @@
+// index.js
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
 import CreatePost from "@/components/CreatePost.vue";
+import PostDetail from "@/components/PostDetail.vue";
+import EditPost from "@/components/EditPost.vue";
 
 const routes = [
   {
@@ -24,6 +27,16 @@ const routes = [
     path: "/create-post",
     name: "CreatePost",
     component: CreatePost,
+  },
+  {
+    path: "/post/:postId",
+    name: "PostDetail",
+    component: PostDetail,
+  },
+  {
+    path: "/post/:postId/edit",
+    name: "post-edit",
+    component: EditPost,
   },
 ];
 

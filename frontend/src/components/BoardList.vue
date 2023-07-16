@@ -1,3 +1,4 @@
+<!-- BoardList.vue -->
 <template>
   <v-table density="compact">
     <thead>
@@ -9,7 +10,12 @@
     </thead>
     <tbody>
       <tr v-for="post in posts" :key="post.id">
-        <td>{{ post.title }}</td>
+        <td>
+          <router-link
+            :to="{ name: 'PostDetail', params: { postId: post.id } }"
+            >{{ post.title }}</router-link
+          >
+        </td>
         <td>{{ getWriterName(post.user) }}</td>
         <td>{{ formatCreatedAt(post.createdAt) }}</td>
       </tr>
@@ -34,7 +40,7 @@ export default {
   methods: {
     fetchPosts() {
       axios
-        .get("/post")
+        .get("/api/post")
         .then((response) => {
           this.posts = response.data;
           this.fetchWriters(); // 작성자 정보 가져오기
@@ -45,7 +51,7 @@ export default {
     },
     fetchWriters() {
       axios
-        .get("/users")
+        .get("/api/users")
         .then((response) => {
           this.writers = response.data;
         })
@@ -64,3 +70,12 @@ export default {
   },
 };
 </script>
+<style>
+a {
+  text-decoration: none;
+  color: black;
+}
+td {
+  align: "center";
+}
+</style>

@@ -114,7 +114,7 @@ export default {
         this.terms
       ) {
         if (this.password === this.passwordChk) {
-          axios.post("sign-api/sign-up", userData).then((response) => {
+          axios.post("/api/sign-api/sign-up", userData).then((response) => {
             if (response.status === 200) {
               console.log("회원가입 성공");
               window.alert("회원가입을 축하합니다.");
