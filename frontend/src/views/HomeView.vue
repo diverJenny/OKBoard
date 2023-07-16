@@ -1,16 +1,20 @@
+<!-- HomeView.vue -->
 <template>
   <PageHeader />
-  <BoardList class="d-flex align-center justify-center" />
-  <router-link v-if="isLoggedIn" to="/create-post">
-    <v-btn icon="mdi-plus" size="small" color="indigo"></v-btn>
-  </router-link>
-  <v-btn
-    v-else
-    icon="mdi-plus"
-    size="small"
-    color="indigo"
-    @click="showLoginMessage"
-  ></v-btn>
+  <div class="board-container" style="margin-top: 40px">
+    <BoardList class="d-flex align-center justify-center" />
+    <div
+      class="button-container d-flex justify-center"
+      style="margin-top: 15px; margin-left: 170px"
+    >
+      <router-link v-if="isLoggedIn" to="/create-post">
+        <v-btn variant="outlined" size="small">Write a post</v-btn>
+      </router-link>
+      <v-btn v-else variant="outlined" size="small" @click="showLoginMessage">
+        Write a post
+      </v-btn>
+    </div>
+  </div>
 </template>
 
 <script>

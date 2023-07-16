@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,15 @@ public class UserService {
         return repository.findById(id)
                 .map(User::toUserDto)
                 .orElseThrow(() -> new Exception("User not found with ID: " + id));
+    }
+
+    public boolean validatePassword(Long id, String password) {
+        Optional<User> userOptional = repository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return user.getPassword().equals(password);
+        }
+        throw new RuntimeException("User not found");
     }
 
     public void updateUser(UserDTO userDto) throws Exception {

@@ -3,21 +3,21 @@
   <v-table density="compact">
     <thead>
       <tr>
-        <th class="text-left">Title</th>
-        <th class="text-left">Writer</th>
-        <th class="text-left">Date Created</th>
+        <th class="text-center">Title</th>
+        <th class="text-center">Writer</th>
+        <th class="text-center">Date Created</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="post in posts" :key="post.id">
-        <td>
+        <td class="text-center">
           <router-link
             :to="{ name: 'PostDetail', params: { postId: post.id } }"
             >{{ post.title }}</router-link
           >
         </td>
-        <td>{{ getWriterName(post.user) }}</td>
-        <td>{{ formatCreatedAt(post.createdAt) }}</td>
+        <td class="text-center">{{ getWriterName(post.user) }}</td>
+        <td class="text-center">{{ formatCreatedAt(post.createdAt) }}</td>
       </tr>
     </tbody>
   </v-table>
@@ -51,7 +51,7 @@ export default {
     },
     fetchWriters() {
       axios
-        .get("/api/users")
+        .get("/api/user")
         .then((response) => {
           this.writers = response.data;
         })

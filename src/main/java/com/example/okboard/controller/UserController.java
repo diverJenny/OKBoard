@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -27,11 +27,18 @@ public class UserController {
 
     // 사용자 조회
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getUsers(@PathVariable("id") Long id) throws Exception{
+    public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id) throws Exception {
         UserDTO user = userService.findUserById(id);
+        System.out.println(user);
         return ResponseEntity.ok(user);
     }
 
+    // 비밀번호 확인
+    @GetMapping("/validate-password/{id}")
+    public ResponseEntity<Boolean> validatePassword(@PathVariable("id") Long id, @RequestParam("password") String password) {
+        boolean isPasswordValid = userService.validatePassword(id, password);
+        return ResponseEntity.ok(isPasswordValid);
+    }
 
     // 사용자 수정
     @PutMapping("/{id}")

@@ -9,8 +9,8 @@
       max-width="448"
       rounded="lg"
     >
-      <v-card-text class="text-center text-blue" style="font-size: x-large">
-        Sign In</v-card-text
+      <v-card-title class="text-center text-blue" style="font-size: x-large">
+        Sign In</v-card-title
       >
 
       <div class="text-subtitle-1 text-medium-emphasis">Account</div>

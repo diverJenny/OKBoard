@@ -3,9 +3,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignIn from "@/views/SignIn.vue";
 import SignUp from "@/views/SignUp.vue";
-import CreatePost from "@/components/CreatePost.vue";
-import PostDetail from "@/components/PostDetail.vue";
-import EditPost from "@/components/EditPost.vue";
+import CreatePost from "@/views/CreatePost.vue";
+import PostDetail from "@/views/PostDetail.vue";
+import EditPost from "@/views/EditPost.vue";
+import UserDetail from "@/views/UserDetail.vue";
 
 const routes = [
   {
@@ -35,8 +36,13 @@ const routes = [
   },
   {
     path: "/post/:postId/edit",
-    name: "post-edit",
+    name: "EditPost",
     component: EditPost,
+  },
+  {
+    path: "/user/:userId",
+    name: "UserDetail",
+    component: UserDetail,
   },
 ];
 
