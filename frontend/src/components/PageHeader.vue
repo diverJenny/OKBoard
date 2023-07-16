@@ -15,6 +15,12 @@
           Sign Up
         </v-btn></router-link
       >
+      <router-link
+        v-if="$store.state.account.id"
+        :to="`/user/${$store.state.account.id}`"
+      >
+        <v-btn variant="text" v-text="username"></v-btn>
+      </router-link>
       <router-link to="/" v-if="$store.state.account.id"
         ><v-btn variant="text" @click="logout"> Logout </v-btn></router-link
       >
@@ -27,10 +33,30 @@
 <script>
 import store from "@/scripts/store";
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "PageHeader",
+  data() {
+    return {
+      username: "",
+    };
+  },
+  created() {
+    this.fetchUsername();
+  },
   methods: {
+    fetchUsername() {
+      const userId = sessionStorage.getItem("user_id");
+      axios
+        .get(`/api/user/${userId}`)
+        .then((response) => {
+          this.username = response.data.name;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     logout() {
       store.commit("setAccount", 0);
       sessionStorage.removeItem("user_id");
