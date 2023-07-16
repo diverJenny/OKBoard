@@ -1,5 +1,5 @@
 <template>
-  <v-table density="compact">
+  <v-table density="compact" class="d-flex align-center justify-center">
     <thead>
       <tr>
         <th class="text-center">email</th>
@@ -7,19 +7,53 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="post in posts" :key="post.id">
+      <tr v-for="user in users" :key="user.id">
         <td class="text-center">
           <router-link
-            :to="{ name: 'PostDetail', params: { postId: post.id } }"
-            >{{ post.title }}</router-link
+            :to="{ name: 'UserDetail', params: { userId: user.id } }"
+            >{{ user.email }}</router-link
           >
         </td>
-        <td class="text-center">{{ getWriterName(post.user) }}</td>
+        <td class="text-center">{{ user.name }}</td>
       </tr>
     </tbody>
   </v-table>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
 
-<style scoped></style>
+export default {
+  name: "UserList",
+  data() {
+    return {
+      users: [],
+    };
+  },
+  created() {
+    this.fetchUsers();
+  },
+  methods: {
+    fetchUsers() {
+      axios
+        .get("/api/user")
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
+</script>
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: black;
+}
+td {
+  text-align: center;
+}
+</style>

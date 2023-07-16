@@ -7,6 +7,7 @@ import CreatePost from "@/views/CreatePost.vue";
 import PostDetail from "@/views/PostDetail.vue";
 import EditPost from "@/views/EditPost.vue";
 import UserDetail from "@/views/UserDetail.vue";
+import UserList from "@/components/UserList.vue";
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: "/user/:userId",
     name: "UserDetail",
     component: UserDetail,
+  },
+  {
+    path: "/user-management",
+    name: "UserList",
+    component: UserList,
   },
 ];
 
