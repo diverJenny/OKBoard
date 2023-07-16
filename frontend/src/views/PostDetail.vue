@@ -21,13 +21,14 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        v-if="isCurrentUserPostAuthor()"
+        v-if="isCurrentUserPostAuthor || isCurrentUserManager"
         color="deep-purple-accent-4"
         @click="editPost"
       >
-        Edit </v-btn
-      ><v-btn
-        v-if="isCurrentUserPostAuthor()"
+        Edit
+      </v-btn>
+      <v-btn
+        v-if="isCurrentUserPostAuthor || isCurrentUserManager"
         style="color: Red"
         @click="deletePost"
       >
@@ -36,7 +37,6 @@
     </v-card-actions>
   </v-card>
 </template>
-
 <script>
 import axios from "axios";
 import router from "@/router";
@@ -65,9 +65,24 @@ export default {
     },
     isCurrentUserPostAuthor() {
       const loggedInUserId = sessionStorage.getItem("user_id");
-      return (
-        this.post.user && Number(this.post.user.id) === Number(loggedInUserId)
-      );
+      const postAuthorId = this.post.user ? this.post.user.id : null;
+
+      return postAuthorId && Number(postAuthorId) === Number(loggedInUserId);
+    },
+    isCurrentUserManager() {
+      const loggedInUserId = sessionStorage.getItem("user_id");
+      axios
+        .get(`/api/user/${loggedInUserId}`)
+        .then((response) => {
+          const user = response.data;
+          // console.log(user);
+          // console.log(user.role);
+          return user.role;
+        })
+        .catch((error) => {
+          console.error(error);
+          return false;
+        });
     },
     editPost() {
       const postId = this.$route.params.postId;

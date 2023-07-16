@@ -29,7 +29,7 @@ public class UserController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id) throws Exception {
         UserDTO user = userService.findUserById(id);
-        System.out.println(user);
+//        System.out.println(user);
         return ResponseEntity.ok(user);
     }
 
