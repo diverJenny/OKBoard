@@ -48,14 +48,18 @@ export default {
   methods: {
     fetchUsername() {
       const userId = sessionStorage.getItem("user_id");
-      axios
-        .get(`/api/user/${userId}`)
-        .then((response) => {
-          this.username = response.data.name;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      if (userId) {
+        axios
+          .get(`/api/user/${userId}`)
+          .then((response) => {
+            this.username = response.data.name;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        this.username = "";
+      }
     },
     logout() {
       store.commit("setAccount", 0);

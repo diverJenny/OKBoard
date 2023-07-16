@@ -74,7 +74,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
+      <v-btn color="error" @click="confirmDelete">Withdraw</v-btn>
       <v-btn color="primary" @click="openConfirmPasswordDialog">Edit</v-btn>
     </v-card>
   </div>
@@ -172,6 +172,24 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+    confirmDelete() {
+      if (confirm("정말로 회원 탈퇴하시겠습니까?")) {
+        const userId = sessionStorage.getItem("user_id");
+
+        axios
+          .delete(`/api/user/${userId}`)
+          .then((response) => {
+            if (response.status === 200) {
+              alert("회원 탈퇴되었습니다.");
+              sessionStorage.removeItem("user_id");
+              this.$router.push("/");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     },
   },
 };

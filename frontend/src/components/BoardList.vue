@@ -1,4 +1,3 @@
-<!-- BoardList.vue -->
 <template>
   <v-table density="compact">
     <thead>
@@ -30,12 +29,13 @@ import moment from "moment";
 export default {
   data() {
     return {
-      posts: [], // 게시글 목록을 저장할 배열
+      posts: [],
       writers: [],
     };
   },
   created() {
-    this.fetchPosts(); // 컴포넌트 생성 시 게시글 목록 조회
+    this.fetchPosts();
+    this.fetchWriters();
   },
   methods: {
     fetchPosts() {
@@ -43,7 +43,6 @@ export default {
         .get("/api/post")
         .then((response) => {
           this.posts = response.data;
-          this.fetchWriters(); // 작성자 정보 가져오기
         })
         .catch((error) => {
           console.error(error);
@@ -60,22 +59,25 @@ export default {
         });
     },
     getWriterName(user) {
-      const writer = this.writers.find((writer) => writer.id === user.id);
-      return writer ? writer.name : "N/A";
+      if (user && user.id) {
+        const writer = this.writers.find((writer) => writer.id === user.id);
+        return writer ? writer.name : "N/A";
+      }
+      return "N/A";
     },
-    // 날짜 출력 형식 변환
     formatCreatedAt(createdAt) {
       return moment(createdAt).format("YYYY-MM-DD");
     },
   },
 };
 </script>
+
 <style>
 a {
   text-decoration: none;
   color: black;
 }
 td {
-  align: "center";
+  text-align: center;
 }
 </style>

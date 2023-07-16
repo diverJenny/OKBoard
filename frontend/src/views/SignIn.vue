@@ -103,7 +103,6 @@ export default {
         .post("/api/sign-api/sign-in", formData)
         .then((response) => {
           // 로그인이 성공한 경우
-          console.log(response.data);
           if (response.status === 200) {
             const userId = response.data.id;
 
@@ -112,7 +111,6 @@ export default {
 
             // sessionStorage에 user_id 저장
             sessionStorage.setItem("user_id", userId);
-            console.log(userId);
             router.push("/");
           } else {
             // 로그인 실패 처리
@@ -120,7 +118,11 @@ export default {
           }
         })
         .catch((error) => {
-          console.error(error);
+          if (error.response && error.response.status === 401) {
+            alert("이메일 또는 비밀번호가 잘못되었습니다.");
+          } else {
+            console.error(error);
+          }
         });
     },
   },

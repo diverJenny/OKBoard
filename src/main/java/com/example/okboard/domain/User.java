@@ -1,6 +1,7 @@
 package com.example.okboard.domain;
 
 import com.example.okboard.dto.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.Id;
@@ -44,6 +45,10 @@ public class User {
 
     @ColumnDefault("false")
     private Boolean role;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Post> posts;
 
     public UserDTO toUserDto() {
         return UserDTO.builder()
