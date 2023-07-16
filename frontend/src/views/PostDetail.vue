@@ -1,4 +1,3 @@
-<!-- PostDetail.vue -->
 <template>
   <v-card class="mx-auto" style="max-width: 500px">
     <v-toolbar color="deep-purple-accent-4" cards dark flat>
@@ -37,6 +36,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 import axios from "axios";
 import router from "@/router";
@@ -44,12 +44,15 @@ export default {
   data() {
     return {
       post: {}, // 게시글 상세 내용을 저장할 객체
+      isCurrentUserPostAuthor: false, // 현재 사용자가 게시글 작성자인지 확인하는 변수
+      isCurrentUserManager: false, // 현재 사용자의 role이 manager인지 확인하는 변수
     };
   },
   created() {
     // 라우트 파라미터에서 게시글 ID를 가져옴
     const postId = this.$route.params.postId;
     this.fetchPost(postId); // 게시글 상세 내용 조회
+    this.checkCurrentUserRole(); // 현재 사용자의 role 확인
   },
   methods: {
     fetchPost(postId) {
@@ -63,26 +66,20 @@ export default {
           console.error(error);
         });
     },
-    isCurrentUserPostAuthor() {
+    checkCurrentUserRole() {
       const loggedInUserId = sessionStorage.getItem("user_id");
-      const postAuthorId = this.post.user ? this.post.user.id : null;
-
-      return postAuthorId && Number(postAuthorId) === Number(loggedInUserId);
-    },
-    isCurrentUserManager() {
-      const loggedInUserId = sessionStorage.getItem("user_id");
-      axios
-        .get(`/api/user/${loggedInUserId}`)
-        .then((response) => {
-          const user = response.data;
-          // console.log(user);
-          // console.log(user.role);
-          return user.role;
-        })
-        .catch((error) => {
-          console.error(error);
-          return false;
-        });
+      if (loggedInUserId) {
+        axios
+          .get(`/api/user/${loggedInUserId}`)
+          .then((response) => {
+            const user = response.data;
+            this.isCurrentUserPostAuthor = user.id === this.post.user?.id; // 현재 사용자가 게시글 작성자인지 확인
+            this.isCurrentUserManager = user.role; // 현재 사용자의 role이 manager인지 확인
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     },
     editPost() {
       const postId = this.$route.params.postId;
